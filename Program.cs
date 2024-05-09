@@ -1,5 +1,6 @@
 
 
+using Microsoft.OpenApi.Models;
 using VideoConferenceApi.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +15,10 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "VideoConferenceApi", Version = "v1" });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -9,9 +9,11 @@ public class ParticipantController : ControllerBase
     public ParticipantController(IParticipantService participantService)
     {
         _participantService = participantService;
+
     }
 
     [HttpGet("GetAll{discussionID}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Results<Ok<IEnumerable<PatricipantDTO>>, NotFound<string>>))]
     public async Task<Results<Ok<IEnumerable<PatricipantDTO>>, NotFound<string>>> GetAllParticipantsInDiscussion(int discussionID)
     {
         IEnumerable<PatricipantDTO> participants = await _participantService.GetAllParticipantsInDiscussion(discussionID);
